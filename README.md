@@ -4,7 +4,7 @@ The TebibCloud provider for Terraform and OpenTofu (Phase 7, ADR 0042). It manag
 through the public API (`/api/v1` on `console.tebibcloud.com`) with the same credentials as the
 `tebib` CLI.
 
-Moving from `tebibcloud/tebib` (0.2.0 and older)? See the 0.3.0 entry in CHANGELOG.md.
+Moving from `tebibhost/tebib` 0.1.0? See the 0.1.0 entry in CHANGELOG.md.
 
 Preview (0.x): breaking changes are allowed before 1.0.0 and are listed in CHANGELOG.md.
 It is on the [Terraform registry](https://registry.terraform.io/providers/tebibcloud/tebibcloud/latest).
@@ -91,7 +91,7 @@ TF_ACC=1 TEBIB_ACCESS_KEY_ID=... TEBIB_SECRET_ACCESS_KEY=... TEBIB_ORGANIZATION=
 
 1. Run the acceptance tests against the lab (above) with a test project.
 2. In CHANGELOG.md, turn `## X.Y.Z (unreleased)` into `## X.Y.Z (YYYY-MM-DD)`.
-3. Tag the monorepo `terraform-provider-vX.Y.Z` and push the tag.
+3. Tag the monorepo `terraform-provider-tebibcloud-vX.Y.Z` and push the tag.
 
 The monorepo's `.github/workflows/terraform-provider-release.yml` then copies this directory
 (`git subtree split`) to the public repository's `main` and tags it `vX.Y.Z`. There,

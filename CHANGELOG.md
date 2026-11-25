@@ -1,12 +1,15 @@
 # Changelog
 
-## 0.3.0 (unreleased)
+## 0.1.0 (unreleased)
+
+First release as `tebibcloud/tebibcloud`, a new provider in the `tebibcloud` namespace. It carries
+everything from `tebibhost/tebib` 0.1.0 plus the never-published 0.2.0 below, and:
 
 - **Breaking: the provider is renamed `tebibcloud`.** The registry address is
-  `tebibcloud/tebibcloud` (was `tebibcloud/tebib`), every resource and data source is
+  `tebibcloud/tebibcloud` (was `tebibhost/tebib`), every resource and data source is
   `tebibcloud_*` (was `tebib_*`), the provider block is `provider "tebibcloud"` and the Go module
-  is `github.com/tebibcloud/terraform-provider-tebibcloud`. `tebibcloud/tebib` 0.2.0 and older stay
-  where they are and get no more releases. Settings are unchanged: the `TEBIB_*` environment
+  is `github.com/tebibcloud/terraform-provider-tebibcloud`. `tebibhost/tebib` 0.1.0 stays
+  where it is and gets no more releases (0.2.0 was never published). Settings are unchanged: the `TEBIB_*` environment
   variables and the `tebib` CLI profile files work as before.
 
   To move a configuration:
@@ -22,8 +25,8 @@
 
      ```sh
      tofu state pull > state.json && cp state.json state.backup.json
-     jq '.serial += 1 | .resources |= map(.type |= sub("^tebib_"; "tebibcloud_") | .provider |= sub("/tebibcloud/tebib\"\\]$"; "/tebibcloud/tebibcloud\"]") | .instances |= map(if .dependencies then .dependencies |= map(sub("^(?<d>data\\.)?tebib_"; "\(.d // "")tebibcloud_")) else . end))' state.json > state.new.json
-     jq -e '[.resources[] | select((.type | startswith("tebib_")) or (.provider | test("/tebibcloud/tebib\"\\]$")))] | length == 0' state.new.json
+     jq '.serial += 1 | .resources |= map(.type |= sub("^tebib_"; "tebibcloud_") | .provider |= sub("/tebibhost/tebib\"\\]$"; "/tebibcloud/tebibcloud\"]") | .instances |= map(if .dependencies then .dependencies |= map(sub("^(?<d>data\\.)?tebib_"; "\(.d // "")tebibcloud_")) else . end))' state.json > state.new.json
+     jq -e '[.resources[] | select((.type | startswith("tebib_")) or (.provider | test("/tebibhost/tebib\"\\]$")))] | length == 0' state.new.json
      tofu init -upgrade && tofu state push state.new.json
      tofu plan   # must show no replacement
      ```
@@ -45,7 +48,15 @@
   `tebibcloud_images` gains `distro`, `distro_name`, `version`, `is_default`, `sort_order`;
   `tebibcloud_instance_types` gains `schedulable`, `visibility`, `retire_after`.
 
-## 0.2.0 (2026-11-19)
+## History: `tebibhost/tebib`
+
+The provider's earlier name. Its versions below stay on the registry as `tebibhost/tebib` and get no
+more releases.
+
+### 0.2.0 (2026-11-19, never published)
+
+This release never reached the registry: its public repository was to live in a `tebibcloud` GitHub
+organization that did not exist yet. Its changes ship in `tebibcloud/tebibcloud` 0.1.0.
 
 - The provider moves to the `tebibcloud` namespace: `source = "tebibcloud/tebib"` and the Go module
   `github.com/tebibcloud/terraform-provider-tebib`. The `tebibhost/tebib` 0.1.0 stays where it is; it is not
@@ -72,7 +83,7 @@
   `unit_price_usd` is `unit_price`, `monthly_usd` is `monthly`, `monthly_usd_by_meter` is
   `monthly_by_meter`; each price also has `currency`.
 
-## 0.1.0 (2026-11-07)
+### 0.1.0 (2026-11-07)
 
 First version.
 

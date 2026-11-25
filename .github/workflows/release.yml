@@ -1,6 +1,6 @@
 # Release (ADR 0042). This file runs in the public tebibcloud/terraform-provider-tebibcloud
 # repository, which is a copy of terraform-provider-tebibcloud/ in the platform monorepo: there,
-# the tag terraform-provider-vX.Y.Z makes .github/workflows/terraform-provider-release.yml
+# the tag terraform-provider-tebibcloud-vX.Y.Z makes .github/workflows/terraform-provider-release.yml
 # push this directory here and tag it vX.Y.Z, which starts this workflow. Don't change this
 # repository directly: changes go to the monorepo.
 #
