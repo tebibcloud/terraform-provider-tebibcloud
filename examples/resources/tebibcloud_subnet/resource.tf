@@ -1,0 +1,5 @@
+resource "tebibcloud_subnet" "web" {
+  name   = "web"
+  vpc_id = tebibcloud_vpc.main.id
+  cidr   = "10.1.1.0/24"
+}

@@ -1,0 +1,1 @@
+terraform import tebibcloud_iam_policy_attachment.ci_vm_operator pat-abc123
