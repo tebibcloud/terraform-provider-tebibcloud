@@ -160,6 +160,26 @@ resource "tebibcloud_nat_gateway" "main" {
 				PlanOnly:    true,
 				ExpectError: regexpMust(`(?s)region.*(not expected|read-only|Unsupported argument)`),
 			},
+			{
+				// the post-test destroy reuses the last config, so end on a valid one
+				Config: mockProvider(srv) + `
+resource "tebibcloud_vpc" "main" {
+  name = "main"
+  cidr = "10.1.0.0/16"
+}
+
+resource "tebibcloud_subnet" "web" {
+  name   = "web"
+  vpc_id = tebibcloud_vpc.main.id
+  cidr   = "10.1.1.0/24"
+}
+
+resource "tebibcloud_nat_gateway" "main" {
+  name      = "main"
+  subnet_id = tebibcloud_subnet.web.id
+}
+`,
+			},
 		},
 	})
 }
@@ -201,6 +221,10 @@ resource "tebibcloud_load_balancer_listener" "tcp" {
 				Config:      cfg(`tls_policy = "tls10"`),
 				PlanOnly:    true,
 				ExpectError: regexpMust(`tls12-intermediate`),
+			},
+			{
+				// the post-test destroy reuses the last config, so end on a valid one
+				Config: cfg(""),
 			},
 		},
 	})
