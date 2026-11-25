@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 (unreleased)
+## 0.1.0 (2026-11-25)
 
 First release as `tebibcloud/tebibcloud`, a new provider in the `tebibcloud` namespace. It carries
 everything from `tebibhost/tebib` 0.1.0 plus the never-published 0.2.0 below, and:
